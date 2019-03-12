@@ -8,7 +8,7 @@ router.post('/', (req, res) => {
     if(!foundUser){
       res.status(401).json({
         status: 401,
-        message: 'invalid'
+        message: 'Invalid Username'
       })
     } else if(bcrypt.compareSync(req.body.password, foundUser.password)){
         req.session.currentUser = foundUser;
@@ -16,8 +16,33 @@ router.post('/', (req, res) => {
           status: 201,
           message: 'session created'
         })
+    } else {
+        res.status(401).json({
+          status: 401,
+          message: 'Incorrect Password'
+        })
     }
   })
-})
+});
+
+router.get('/currentUser', (req, res) => {
+  res.status(200).json(req.session.currentUser || false)
+});
+
+router.delete('/', (req, res) => {
+  req.session.destroy((err) => {
+    if(err){
+      res.status(500).json({
+        status: 500,
+        message: 'Unexpected error occurred'
+      })
+    } else {
+        res.status(200).json({
+          status: 200,
+          message: 'Logged Out!'
+        })
+    }
+  })
+});
 
 module.exports = router;

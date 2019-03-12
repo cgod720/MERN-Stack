@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from './components/Header'
 import CoinList from './components/CoinList'
 
 
@@ -7,6 +8,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
+      currentView: 'none',
       coins: []
     }
   }
@@ -40,14 +42,20 @@ class App extends Component {
     })
   }
 
+  handleView = (view) => {
+    this.setState({
+      currentView: view
+    })
+  }
+
   componentDidMount() {
-    this.fetchCryptos()
+    // this.fetchCryptos()
   }
 
   render() {
     return (
       <div className="App">
-        <h1>Header</h1>
+        <Header />
         <CoinList
           coins={this.state.coins}
         />
