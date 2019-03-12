@@ -1,10 +1,83 @@
+require('dotenv').config()
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
-const PORT = 3000;
+const bodyParser = require('body-parser')
+const session =  require('express-session')
+const cors = require('cors');
+const rp = require('request-promise');
+const PORT = process.env.port || 5000;
+
+//Database
+const MONGODB_URI = process.env.port || 'mongodb://localhost/testing'
+const API_KEY = process.env.REACT_APP_COIN_API
 
 
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+}
+
+
+//Middleware
+app.use(express.json());
+app.use(express.static('public'));
+app.use(bodyParser.json())
+app.use(cors())
+
+app.use(session({
+  secret: 'mosecret',
+  resave: false,
+  saveUninitialized: false
+}));
+
+//Routes Controllers
+const usersController = require('./controllers/users.js');
+app.use('/users', usersController)
+
+const sessionsController = require('./controllers/sessions.js');
+app.use('/sessions', sessionsController)
+
+
+//Api Key
+app.get('/getApiKey', cors(corsOptions), (req, res) => {
+  res.json(API_KEY)
+})
+
+//CMC Request
+app.get('/cmc', (req, res) => {
+
+  const requestOptions = {
+    method: 'GET',
+    uri: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
+    qs: {
+      start: 1,
+      limit: 10,
+      convert: 'USD'
+    },
+    headers: {
+      'X-CMC_PRO_API_KEY': API_KEY
+    },
+    json: true,
+    gzip: true
+  };
+
+  rp(requestOptions).then(response => {
+    console.log('API call response:', response);
+    res.json({response:response})
+  }).catch((err) => {
+    console.log('API call error:', err.message);
+    res.json({err:err})
+  });
+})
 
 //Listener
 app.listen(PORT, () => {
-  console.log('Listening on port: ', PORT);
+  console.log(`Awaiting your command, Captain. Listening on port: ${PORT}`);
+})
+
+//Mongoose Connection
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+mongoose.connection.once('open', () => {
+  console.log("Mongo is a go!");
 })
