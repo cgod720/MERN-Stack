@@ -5,10 +5,8 @@ class Coins extends Component {
   render(){
     return(
       <div className="coin">
-        <ul>
-          <li>{this.props.coin.name}</li>
-          <li></li>
-        </ul>
+        <span>{this.props.coin.name}  $</span>
+        <span>{this.props.coin.quote.USD.price}</span>
       </div>
     )
   }

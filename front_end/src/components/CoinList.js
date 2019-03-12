@@ -7,6 +7,7 @@ class CoinList extends Component {
       <div>
         {this.props.coins.map((coin, index) => {
           return(
+
             <Coins
               key={index}
               coin={coin}
@@ -14,7 +15,6 @@ class CoinList extends Component {
             />
           )
         })}
-
       </div>
     )
   }
