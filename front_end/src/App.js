@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header'
+import SignUpForm from './components/SignUpForm'
 import CoinList from './components/CoinList'
+
 
 
 class App extends Component {
@@ -9,7 +11,9 @@ class App extends Component {
     super(props)
     this.state = {
       currentView: 'none',
-      coins: []
+      currentUser: '',
+      coins: [],
+      users: []
     }
   }
   fetchCryptos = () => {
@@ -42,6 +46,23 @@ class App extends Component {
     })
   }
 
+  handleCreateUser = (user) => {
+    fetch('http://localhost5000/users', {
+      body: JSON.stringify(user),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((createdUser) => {
+        return createdUser.json()
+      })
+      .then((jData) => {
+        console.log(jData);
+      })
+  }
+
   handleView = (view) => {
     this.setState({
       currentView: view
@@ -56,6 +77,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <SignUpForm
+          handleCreateUser={this.handleCreateUser}
+        />
         <CoinList
           coins={this.state.coins}
         />

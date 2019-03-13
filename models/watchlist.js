@@ -5,7 +5,7 @@ const watchListSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  coin: String,
+  coin: Object,
   createdBy: String
 });
 
