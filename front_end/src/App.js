@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header'
 import SignUpForm from './components/SignUpForm'
+import LogInForm from './components/LogInForm'
 import CoinList from './components/CoinList'
 
 
@@ -70,16 +71,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.fetchCryptos()
+    this.fetchCryptos()
   }
 
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header handleView={this.handleView}/>
+        {this.state.currentView === 'signup' ?
         <SignUpForm
           handleCreateUser={this.handleCreateUser}
-        />
+        /> :
+        <div></div>
+        }
+        {this.state.currentView === 'login' ?
+        <LogInForm
+
+        /> :
+        <div></div>
+        }
         <CoinList
           coins={this.state.coins}
         />

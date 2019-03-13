@@ -20,7 +20,7 @@ class SignUpForm extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSignUpSubmit = (event) => {
     event.preventDefault()
     this.props.handleCreateUser(this.state)
     this.clearForm()
@@ -36,7 +36,7 @@ class SignUpForm extends Component {
   render(){
     return(
       <div>
-        <form>
+        <form onSubmit={this.handleSignUpSubmit}>
           <input
             type="text"
             placeholder="New User"
@@ -49,6 +49,7 @@ class SignUpForm extends Component {
             onChange={this.handlePasswordChange}
             value={this.state.password}
           />
+          <input type='submit'/>
         </form>
       </div>
     )
