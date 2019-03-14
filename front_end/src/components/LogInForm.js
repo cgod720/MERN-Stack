@@ -32,21 +32,24 @@ class LogInForm extends Component {
   render(){
     return(
       <div>
-        <form onSubmit={this.handleLogSubmit}>
-          <input
-            type='text'
-            placeholder='User Name'
-            onChange={this.handleLogUserChange}
-            value={this.state.username}
-          />
-          <input
-            type='text'
-            placeholder='Password'
-            onChange={this.handleLogPassChange}
-            value={this.state.password}
-          />
-          <input type ='submit'/>
-        </form>
+        {!this.props.currentUser ?
+          <form onSubmit={this.handleLogSubmit}>
+            <input
+              type='text'
+              placeholder='User Name'
+              onChange={this.handleLogUserChange}
+              value={this.state.username}
+            />
+            <input
+              type='text'
+              placeholder='Password'
+              onChange={this.handleLogPassChange}
+              value={this.state.password}
+            />
+            <input type ='submit'/>
+          </form>
+           : <div>{this.props.handleView('none')}</div>
+        }
       </div>
     )
   }

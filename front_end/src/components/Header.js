@@ -12,10 +12,13 @@ class Header extends Component {
           </div> :
           <div></div>
         }
-        <nav>
-          <button onClick={() => {this.props.handleView('signup')}}>Sign Up</button>
-          <button onClick={() => {this.props.handleView('login')}}>Log In</button>
-        </nav>
+        {!this.props.currentUser ?
+          <nav>
+            <button onClick={() => {this.props.handleView('signup')}}>Sign Up</button>
+            <button onClick={() => {this.props.handleView('login')}}>Log In</button>
+          </nav> :
+          <div></div>
+        }
       </div>
     )
   }

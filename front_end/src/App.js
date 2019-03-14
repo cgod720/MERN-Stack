@@ -4,6 +4,7 @@ import Header from './components/Header'
 import SignUpForm from './components/SignUpForm'
 import LogInForm from './components/LogInForm'
 import CoinList from './components/CoinList'
+import News from './components/News'
 
 
 
@@ -13,8 +14,8 @@ class App extends Component {
     this.state = {
       currentView: 'none',
       currentUser: '',
-      showList: false,
       coins: [],
+      news: [],
       watchList: []
     }
   }
@@ -39,7 +40,11 @@ class App extends Component {
         return data.json()
       })
       .then((jData) => {
-        console.log(jData);
+        this.sortNews(jData.response.articles);
+        console.log(this.state.news);
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
 
@@ -54,6 +59,20 @@ class App extends Component {
   setCoins = (coins) => {
     this.setState({
       coins: coins
+    })
+  }
+
+  sortNews = (news) => {
+    let newsData = []
+    news.forEach((article) => {
+      newsData.push(article)
+    })
+    this.setNews(newsData)
+  }
+
+  setNews = (articles) => {
+    this.setState({
+      news: articles
     })
   }
 
@@ -116,9 +135,11 @@ class App extends Component {
     })
   }
 
-  createWatchList = () => {
 
-  }
+
+  // createWatchList = () => {
+  //
+  // }
 
   updateArray = (user, array) => {
     this.setState((prevState) => {
@@ -129,11 +150,12 @@ class App extends Component {
     })
   }
 
-  showWatchList = () => {
-    if(this.state.currentUser){
 
-    }
-  }
+  // showWatchList = () => {
+  //   if(this.state.currentUser){
+  //
+  //   }
+  // }
 
   componentDidMount() {
     // this.fetchCryptos()
@@ -158,12 +180,17 @@ class App extends Component {
         {this.state.currentView === 'login' ?
         <LogInForm
           handleCreateSession={this.handleCreateSession}
+          handleView={this.handleView}
+          currentUser={this.state.currentUser}
         /> :
         <div></div>
         }
         <CoinList
           coins={this.state.coins}
           currentUser={this.state.currentUser}
+        />
+        <News
+          news={this.state.news}
         />
       </div>
     );
