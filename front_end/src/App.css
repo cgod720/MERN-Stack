@@ -1,5 +1,5 @@
 h1 {
-  color: white;
+  color: red;
   font-size: 55px;
 }
 
@@ -9,7 +9,7 @@ h1 {
 
 .header {
   margin-top: 0px;
-  background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/rbGMAGytlGjahhgrii/videoblocks-abstract-geometrical-background-with-moving-lines-and-dots-looping-cg-animation-4k-suitable-for-cryptocurrency-financial-social-background_sqd9ffwig_thumbnail-full01.png");
+  /* background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/rbGMAGytlGjahhgrii/videoblocks-abstract-geometrical-background-with-moving-lines-and-dots-looping-cg-animation-4k-suitable-for-cryptocurrency-financial-social-background_sqd9ffwig_thumbnail-full01.png"); */
   height: 300px;
 }
 

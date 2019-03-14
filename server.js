@@ -9,7 +9,7 @@ const rp = require('request-promise');
 const PORT = process.env.port || 5000;
 
 //Database
-const MONGODB_URI = process.env.port || 'mongodb://localhost/testing'
+const MONGODB_URI = process.env.port || 'mongodb://localhost/crypto_sphere'
 const API_KEY = process.env.REACT_APP_COIN_API
 
 
@@ -26,7 +26,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use(session({
-  secret: 'mosecret',
+  secret: "mosecret",
   resave: false,
   saveUninitialized: false
 }));
@@ -37,6 +37,9 @@ app.use('/users', usersController)
 
 const sessionsController = require('./controllers/sessions.js');
 app.use('/sessions', sessionsController)
+
+const watchListController = require('./controllers/watchlist.js');
+app.use('/watchlist', watchListController)
 
 
 //Api Key

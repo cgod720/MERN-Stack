@@ -12,13 +12,16 @@ class Coins extends Component {
           <span>Price: ${this.props.coin.quote.USD.price} </span>
         </div>
         <div>
-        <span>Last Hour: {this.props.coin.quote.USD.percent_change_1h}%   </span>
+          <span>Last Hour: {this.props.coin.quote.USD.percent_change_1h}%   </span>
         </div>
         <div>
-        <span>24h Change: {this.props.coin.quote.USD.percent_change_24h}%   </span>
+          <span>24h Change: {this.props.coin.quote.USD.percent_change_24h}%   </span>
         </div>
         <div>
-        <span>24h Volume: {this.props.coin.quote.USD.volume_24h}</span>
+          <span>24h Volume: {this.props.coin.quote.USD.volume_24h}</span>
+        </div>
+        <div>
+          <span>Market Cap: {this.props.coin.quote.USD.market_cap}</span>
         </div>
         <br/>
       </div>

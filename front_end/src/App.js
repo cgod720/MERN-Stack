@@ -13,8 +13,7 @@ class App extends Component {
     this.state = {
       currentView: 'none',
       currentUser: '',
-      coins: [],
-      users: []
+      coins: []
     }
   }
   fetchCryptos = () => {
@@ -48,7 +47,7 @@ class App extends Component {
   }
 
   handleCreateUser = (user) => {
-    fetch('http://localhost5000/users', {
+    fetch('http://localhost:5000/users', {
       body: JSON.stringify(user),
       method: 'POST',
       headers: {
@@ -64,20 +63,69 @@ class App extends Component {
       })
   }
 
+  handleCreateSession = (user) => {
+    fetch('http://localhost:5000/sessions', {
+      body: JSON.stringify(user),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((createdSession) => {
+        return createdSession.json()
+      })
+      .then((jData) => {
+        console.log(jData);
+        this.setState({
+          currentUser: jData.username
+        })
+        console.log(this.state.currentUser);
+      })
+  }
+
+  handleDeleteSession = (user) => {
+    fetch('http://localhost:5000/sessions', {
+      method: 'DELETE'
+    })
+      .then((data) => {
+        return data.json()
+      })
+      .then((jData) => {
+        console.log(jData);
+        this.setState({
+          currentUser: ''
+        })
+      })
+  }
+
   handleView = (view) => {
     this.setState({
       currentView: view
     })
   }
 
+  updateArray = (user, array) => {
+    this.setState((prevState) => {
+      prevState[array].push(user)
+      return {
+        [array]: prevState[array]
+      }
+    })
+  }
+
   componentDidMount() {
-    this.fetchCryptos()
+    // this.fetchCryptos()
   }
 
   render() {
     return (
       <div className="App">
-        <Header handleView={this.handleView}/>
+        <Header
+          handleView={this.handleView}
+          currentUser={this.state.currentUser}
+          handleDeleteSession={this.handleDeleteSession}
+        />
         {this.state.currentView === 'signup' ?
         <SignUpForm
           handleCreateUser={this.handleCreateUser}
@@ -86,7 +134,7 @@ class App extends Component {
         }
         {this.state.currentView === 'login' ?
         <LogInForm
-
+          handleCreateSession={this.handleCreateSession}
         /> :
         <div></div>
         }

@@ -4,14 +4,14 @@ class SignUpForm extends Component {
   constructor(props){
     super(props)
     this.state = {
-      userName: '',
+      username: '',
       password: ''
     }
   }
 
   handleUserNameChange = (event) => {
     this.setState({
-      userName: event.target.value
+      username: event.target.value
     })
   }
   handlePasswordChange = (event) => {
@@ -41,7 +41,7 @@ class SignUpForm extends Component {
             type="text"
             placeholder="New User"
             onChange={this.handleUserNameChange}
-            value={this.state.name}
+            value={this.state.username}
           />
           <input
             type="text"

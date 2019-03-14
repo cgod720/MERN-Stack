@@ -4,18 +4,18 @@ class LogInForm extends Component {
   constructor(props){
     super(props)
     this.state = {
-      user: '',
-      pass: ''
+      username: '',
+      password: ''
     }
   }
   handleLogUserChange = (event) => {
-    this.state({
-      user: event.target.value
+    this.setState({
+      username: event.target.value
     })
   }
   handleLogPassChange = (event) => {
-    this.state({
-      pass: event.target.value
+    this.setState({
+      password: event.target.value
     })
   }
   handleLogSubmit = (event) => {
@@ -25,26 +25,28 @@ class LogInForm extends Component {
   }
   clearLogForm = () => {
     this.setState({
-      user: '',
-      pass: ''
+      username: '',
+      password: ''
     })
   }
   render(){
     return(
       <div>
-        <input
-          type='text'
-          placeholder='User Name'
-          onChange={this.handleLogUserChange}
-          value={this.state.user}
-        />
-        <input
-          type='text'
-          placeholder='Password'
-          onChange={this.handleLogPassChange}
-          value={this.state.pass}
-        />
-        <input type ='submit'/>
+        <form onSubmit={this.handleLogSubmit}>
+          <input
+            type='text'
+            placeholder='User Name'
+            onChange={this.handleLogUserChange}
+            value={this.state.username}
+          />
+          <input
+            type='text'
+            placeholder='Password'
+            onChange={this.handleLogPassChange}
+            value={this.state.password}
+          />
+          <input type ='submit'/>
+        </form>
       </div>
     )
   }
