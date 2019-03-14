@@ -13,11 +13,12 @@ class App extends Component {
     this.state = {
       currentView: 'none',
       currentUser: '',
-      coins: []
+      showList: false,
+      coins: [],
+      watchList: []
     }
   }
   fetchCryptos = () => {
-    // console.log(this.state.code);
     fetch('http://localhost:5000/cmc')
       .then((data) => {
         return data.json()
@@ -29,6 +30,16 @@ class App extends Component {
       })
       .catch((err) => {
         console.log(err);
+      })
+  }
+
+  fetchNews = () => {
+    fetch('http://localhost:5000/news')
+      .then((data) => {
+        return data.json()
+      })
+      .then((jData) => {
+        console.log(jData);
       })
   }
 
@@ -105,6 +116,10 @@ class App extends Component {
     })
   }
 
+  createWatchList = () => {
+
+  }
+
   updateArray = (user, array) => {
     this.setState((prevState) => {
       prevState[array].push(user)
@@ -114,8 +129,15 @@ class App extends Component {
     })
   }
 
+  showWatchList = () => {
+    if(this.state.currentUser){
+
+    }
+  }
+
   componentDidMount() {
     // this.fetchCryptos()
+    this.fetchNews()
   }
 
   render() {
@@ -129,6 +151,7 @@ class App extends Component {
         {this.state.currentView === 'signup' ?
         <SignUpForm
           handleCreateUser={this.handleCreateUser}
+          handleView={this.handleView}
         /> :
         <div></div>
         }
@@ -140,6 +163,7 @@ class App extends Component {
         }
         <CoinList
           coins={this.state.coins}
+          currentUser={this.state.currentUser}
         />
       </div>
     );

@@ -7,7 +7,7 @@ class Header extends Component {
         <h1 onClick={() => {this.props.handleView('none')}}>Crypto-Sphere</h1>
         {this.props.currentUser ?
           <div>
-            <h4>Welcome, {this.props.currentUser}!</h4>
+            <h3>Welcome, {this.props.currentUser}!</h3>
             <button onClick={() => {this.props.handleDeleteSession(this.props.currentUser)}}>Log Out</button>
           </div> :
           <div></div>

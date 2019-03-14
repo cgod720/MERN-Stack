@@ -11,6 +11,7 @@ const PORT = process.env.port || 5000;
 //Database
 const MONGODB_URI = process.env.port || 'mongodb://localhost/crypto_sphere'
 const API_KEY = process.env.REACT_APP_COIN_API
+const NEWS_KEY = process.env.REACT_APP_NEWS_API
 
 
 const corsOptions = {
@@ -42,11 +43,6 @@ const watchListController = require('./controllers/watchlist.js');
 app.use('/watchlist', watchListController)
 
 
-//Api Key
-app.get('/getApiKey', cors(corsOptions), (req, res) => {
-  res.json(API_KEY)
-})
-
 //CMC Request
 app.get('/cmc', (req, res) => {
 
@@ -64,8 +60,24 @@ app.get('/cmc', (req, res) => {
     json: true,
     gzip: true
   };
-
   rp(requestOptions).then(response => {
+    console.log('API call response:', response);
+    res.json({response:response})
+  }).catch((err) => {
+    console.log('API call error:', err.message);
+    res.json({err:err})
+  });
+})
+
+app.get('/news', (req, res) => {
+  const requestNews = {
+    method: 'GET',
+    uri: 'https://newsapi.org/v2/everything?' + 'q=bitcoin&' +
+            'sortBy=popularity&' + 'apiKey=' + NEWS_KEY,
+    json: true,
+    gzip: true
+  };
+  rp(requestNews).then(response => {
     console.log('API call response:', response);
     res.json({response:response})
   }).catch((err) => {

@@ -23,6 +23,9 @@ class Coins extends Component {
         <div>
           <span>Market Cap: {this.props.coin.quote.USD.market_cap}</span>
         </div>
+        <div>
+          <button>Watch</button>
+        </div>
         <br/>
       </div>
     )

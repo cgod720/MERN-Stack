@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 
 const watchListSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    require: true
-  },
-  coin: Object,
+  coin: Array,
   createdBy: String
 });
 

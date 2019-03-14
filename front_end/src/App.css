@@ -10,7 +10,26 @@ h1 {
 .header {
   margin-top: 0px;
   /* background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/rbGMAGytlGjahhgrii/videoblocks-abstract-geometrical-background-with-moving-lines-and-dots-looping-cg-animation-4k-suitable-for-cryptocurrency-financial-social-background_sqd9ffwig_thumbnail-full01.png"); */
-  height: 300px;
+  height: 200px;
+}
+
+.body-container {
+  display: flex;
+}
+
+.left {
+  width: 50%;
+  text-align: center;
+}
+
+.scroll {
+  overflow: scroll;
+  height: 200px;
+}
+
+.right {
+  width: 50%;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
