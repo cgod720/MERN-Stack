@@ -6,7 +6,9 @@ class Articles extends Component {
       <div className='news-container'>
         <div className='article-container'>
           <a href={this.props.article.url}>{this.props.article.title}</a>
-          <img src={this.props.article.urlToImage} alt={this.props.article.title}/>
+          <a href={this.props.article.url}>
+            <img src={this.props.article.urlToImage} alt={this.props.article.title}/>
+          </a>
         </div>
       </div>
     )

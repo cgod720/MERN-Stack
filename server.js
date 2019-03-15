@@ -61,7 +61,7 @@ app.get('/cmc', (req, res) => {
     gzip: true
   };
   rp(requestOptions).then(response => {
-    console.log('API call response:', response);
+    // console.log('API call response:', response);
     res.json({response:response})
   }).catch((err) => {
     console.log('API call error:', err.message);
@@ -72,13 +72,13 @@ app.get('/cmc', (req, res) => {
 app.get('/news', (req, res) => {
   const requestNews = {
     method: 'GET',
-    uri: 'https://newsapi.org/v2/everything?' + 'q=bitcoin&' +
-            'sortBy=popularity&' + 'apiKey=' + NEWS_KEY,
+    uri: 'https://newsapi.org/v2/everything?' + 'q=crypto&' +
+            'sortBy=latest&' + 'apiKey=' + NEWS_KEY,
     json: true,
     gzip: true
   };
   rp(requestNews).then(response => {
-    console.log('API call response:', response);
+    // console.log('API call response:', response);
     res.json({response:response})
   }).catch((err) => {
     console.log('API call error:', err.message);

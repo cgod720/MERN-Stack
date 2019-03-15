@@ -15,6 +15,7 @@ class CoinList extends Component {
                   key={index}
                   coin={coin}
                   arrayIndex={index}
+                  addToWatchList={this.props.addToWatchList}
                 />
               )
             })}
@@ -23,6 +24,8 @@ class CoinList extends Component {
         <div className='right'>
           {this.props.currentUser ?
             <WatchList
+              currentUser={this.props.currentUser}
+              list={this.props.list}
             /> :
             <div></div>
           }

@@ -6,8 +6,8 @@ const WatchList = require('../models/watchlist.js');
 //create route
 router.post('/', (req, res) => {
   console.log(req.body);
-  WatchList.create(req.body, (err, createdWatchList) => {
-    res.json(createdPlace);
+  WatchList.create(req.body.coin, (err, createdWatchList) => {
+    res.json(createdWatchList);
   });
 });
 
@@ -26,8 +26,8 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  Watchlist.findByIdAnDelete(req.params.id, (err, deletedWatchList) => {
-    res.json(deletedPlace);
+  WatchList.findByIdAnDelete(req.params.id, (err, deletedWatchList) => {
+    res.json(deletedWatchList);
   });
 });
 

@@ -4,7 +4,7 @@ import Articles from './Articles'
 class News extends Component {
   render(){
     return(
-      <div>
+      <div className='articles-container'>
         {this.props.news.map((article, index) => {
           return(
             <Articles

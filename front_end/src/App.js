@@ -16,7 +16,8 @@ class App extends Component {
       currentUser: '',
       coins: [],
       news: [],
-      watchList: []
+      list: [],
+      createdBy: ''
     }
   }
   fetchCryptos = () => {
@@ -108,9 +109,9 @@ class App extends Component {
       .then((jData) => {
         console.log(jData);
         this.setState({
-          currentUser: jData.username
+          currentUser: jData.username,
+          createdBy: jData.id
         })
-        console.log(this.state.currentUser);
       })
   }
 
@@ -136,11 +137,6 @@ class App extends Component {
   }
 
 
-
-  // createWatchList = () => {
-  //
-  // }
-
   updateArray = (user, array) => {
     this.setState((prevState) => {
       prevState[array].push(user)
@@ -150,12 +146,25 @@ class App extends Component {
     })
   }
 
+  addToWatchList = (list) => {
+    fetch('http://localhost:5000/watchlist', {
+      body: JSON.stringify(list),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((data) => {
+        return data.json()
+      })
+      .then((jData) => {
+        console.log(jData);
+      })
+  }
 
-  // showWatchList = () => {
-  //   if(this.state.currentUser){
-  //
-  //   }
-  // }
+
+
 
   componentDidMount() {
     // this.fetchCryptos()
@@ -165,6 +174,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <span>
         <Header
           handleView={this.handleView}
           currentUser={this.state.currentUser}
@@ -185,9 +195,11 @@ class App extends Component {
         /> :
         <div></div>
         }
+        </span>
         <CoinList
           coins={this.state.coins}
           currentUser={this.state.currentUser}
+          addToWatchList={this.addToWatchList}
         />
         <News
           news={this.state.news}

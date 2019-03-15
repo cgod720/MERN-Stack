@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const watchListSchema = new mongoose.Schema({
-  coin: Array,
+  name: String,
+  symbol: String,
+  quote: Object,
   createdBy: String
 });
 
