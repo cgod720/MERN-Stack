@@ -110,8 +110,9 @@ class App extends Component {
         console.log(jData);
         this.setState({
           currentUser: jData.username,
-          createdBy: jData.id
+          createdBy: jData.username
         })
+        this.getWatchList()
       })
   }
 
@@ -160,14 +161,67 @@ class App extends Component {
       })
       .then((jData) => {
         console.log(jData);
+        this.getWatchList()
       })
+  }
+
+  getWatchList = () => {
+    fetch('http://localhost:5000/watchlist')
+      .then((data) => {
+        return data.json()
+      })
+      .then((jData) => {
+        console.log(jData);
+        this.sortList(jData)
+        console.log(this.state.list);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  sortList = (currencies) => {
+    let listData = []
+    currencies.forEach((coin) => {
+      listData.push(coin)
+    })
+    this.setList(listData)
+  }
+
+  setList = (coins) => {
+    this.setState({
+      list: coins
+    })
+  }
+
+  handleDeleteWatchList = (arrayIndex, currentArray) => {
+    console.log(arrayIndex);
+    console.log(currentArray);
+    fetch('http://localhost:5000/watchlist', {
+      method: 'DELETE'
+    })
+      .then((data) => {
+        this.removeFromArray(currentArray, arrayIndex)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  removeFromArray = (array, arrayIndex) => {
+    this.setState((prevState) => {
+      prevState[array].splice(arrayIndex, 1)
+      return {
+        [array]: prevState[array]
+      }
+    })
   }
 
 
 
 
   componentDidMount() {
-    // this.fetchCryptos()
+    this.fetchCryptos()
     this.fetchNews()
   }
 
@@ -200,6 +254,8 @@ class App extends Component {
           coins={this.state.coins}
           currentUser={this.state.currentUser}
           addToWatchList={this.addToWatchList}
+          list={this.state.list}
+          handleDeleteWatchList={this.handleDeleteWatchList}
         />
         <News
           news={this.state.news}

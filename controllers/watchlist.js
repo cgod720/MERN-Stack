@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 
 //Read route
 router.get('/', (req, res) => {
-  WatchList.find({createdBy: req.session.currentUser.id}, (err, foundWatchList) => {
+  WatchList.find({createdBy: req.session.currentUser}, (err, foundWatchList) => {
     res.json(foundWatchList);
   });
 });
@@ -25,8 +25,8 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
-  WatchList.findByIdAnDelete(req.params.id, (err, deletedWatchList) => {
+router.delete('/', (req, res) => {
+  WatchList.findOneAndDelete(req.params, (err, deletedWatchList) => {
     res.json(deletedWatchList);
   });
 });

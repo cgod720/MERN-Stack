@@ -22,13 +22,21 @@ class CoinList extends Component {
           </div>
         </div>
         <div className='right'>
-          {this.props.currentUser ?
-            <WatchList
-              currentUser={this.props.currentUser}
-              list={this.props.list}
-            /> :
-            <div></div>
-          }
+          <h3>Watch List</h3>
+          <div className="scroll">
+            {this.props.list.map((listing, index) => {
+              return(
+                <WatchList
+                  key={index}
+                  arrayIndex={index}
+                  currentUser={this.props.currentUser}
+                  listing={listing}
+                  handleDeleteWatchList={this.props.handleDeleteWatchList}
+                  currentArray='list'
+                />
+              )
+            })}
+          </div>
         </div>
       </div>
     )

@@ -5,56 +5,27 @@ class WatchList extends Component {
     super(props)
     this.state = {
       createdBy: this.props.currentUser.id,
-      list: []
     }
   }
-
-  getWatchList = (list) => {
-    fetch('http://localhost:5000/watchlist')
-      .then((data) => {
-        return data.json()
-      })
-      .then((jData) => {
-        console.log(jData);
-        this.sortList(jData)
-        console.log(this.state.list);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  sortList = (currencies) => {
-    let coinData = []
-    currencies.forEach((coin) => {
-      coinData.push(coin)
-    })
-    this.setList(coinData)
-  }
-
-  setList = (coins) => {
-    this.setState({
-      list: coins
-    })
-  }
-
-  componentDidMount(){
-    // this.getWatchList()
-  }
-
 
   render(){
     return(
       <div>
-        <h3>Watch List</h3>
-          {this.state.list.map((coin) => {
-            return(
-              <div>
-                <p>{coin.name}</p>
-                <p>{coin.quote.USD.price}</p>
-              </div>
-            )
-          })}
+      {this.props.currentUser ?
+        <div>
+          <div>
+            <span>{this.props.listing.name} ({this.props.listing.symbol})</span>
+          </div>
+          <div>
+            Price: {this.props.listing.quote.USD.price}
+          </div>
+          <div>
+            <button onClick={() => {this.props.handleDeleteWatchList(this.props.arrayIndex, this.props.currentArray)}}>X</button>
+          </div>
+          <br/>
+        </div>
+        : <div></div>
+      }
       </div>
     )
   }
