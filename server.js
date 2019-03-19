@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const session =  require('express-session')
 const cors = require('cors');
 const rp = require('request-promise');
-const PORT = process.env.port || 5000;
+const PORT = process.env.PORT || 5000;
 
 //Database
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/crypto_sphere'
