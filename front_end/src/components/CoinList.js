@@ -3,19 +3,41 @@ import Coins from './Coins'
 import WatchList from './WatchList'
 
 class CoinList extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      search: ''
+    }
+  }
+  updateSearch = (event) => {
+    this.setState({
+      search: event.target.value
+    })
+  }
   render(){
+    let filteredCoins = this.props.coins.filter(
+      (coin) => {
+        return coin.name.indexOf(this.state.search) !== -1;
+    })
     return(
       <div className='body-container'>
         <div className='left'>
           <h3>Cryptocurrencies</h3>
           <div className='scroll'>
-            {this.props.coins.map((coin, index) => {
+            <input
+              type="text"
+              placeholder="Search Coins"
+              onChange={this.updateSearch}
+              value={this.state.search}
+              />
+            {filteredCoins.map((coin, index) => {
               return(
                 <Coins
                   key={index}
                   coin={coin}
                   arrayIndex={index}
                   addToWatchList={this.props.addToWatchList}
+                  createdBy={this.props.currentUser}
                 />
               )
             })}
@@ -33,6 +55,7 @@ class CoinList extends Component {
                   listing={listing}
                   handleDeleteWatchList={this.props.handleDeleteWatchList}
                   currentArray='list'
+                  createdBy={this.props.createdBy}
                 />
               )
             })}

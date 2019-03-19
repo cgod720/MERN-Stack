@@ -99,7 +99,7 @@ class App extends Component {
       body: JSON.stringify(user),
       method: 'POST',
       headers: {
-        'Accept': 'application/json, text/plain, */*',
+        'Accept': 'application/json, text/plain',
         'Content-Type': 'application/json'
       }
     })
@@ -148,6 +148,7 @@ class App extends Component {
   }
 
   addToWatchList = (list) => {
+    console.log(list);
     fetch('http://localhost:5000/watchlist', {
       body: JSON.stringify(list),
       method: 'POST',
@@ -256,6 +257,7 @@ class App extends Component {
           addToWatchList={this.addToWatchList}
           list={this.state.list}
           handleDeleteWatchList={this.handleDeleteWatchList}
+          createdBy={this.state.createdBy}
         />
         <News
           news={this.state.news}

@@ -14,13 +14,10 @@ class WatchList extends Component {
       {this.props.currentUser ?
         <div>
           <div>
-            <span>{this.props.listing.name} ({this.props.listing.symbol})</span>
+            <span>{this.props.listing.name} ({this.props.listing.symbol})</span> ${this.props.listing.quote.USD.price}
           </div>
           <div>
-            Price: {this.props.listing.quote.USD.price}
-          </div>
-          <div>
-            <button onClick={() => {this.props.handleDeleteWatchList(this.props.arrayIndex, this.props.currentArray)}}>X</button>
+            <button onClick={() => {this.props.handleDeleteWatchList(this.props.arrayIndex, this.props.currentArray)}}><i className="fas fa-trash-alt"></i></button>
           </div>
           <br/>
         </div>

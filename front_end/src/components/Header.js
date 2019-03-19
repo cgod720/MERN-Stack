@@ -4,7 +4,7 @@ class Header extends Component {
   render(){
     return(
       <div className="header">
-        <span className='headline' onClick={() => {this.props.handleView('none')}}>CRYPTOSPHERE</span>
+        <span className='headline' onClick={() => {this.props.handleView('none')}}>CRYPTO<i className="fas fa-globe" id="spin"></i>SPHERE</span>
         {this.props.currentUser ?
           <span>
             <button  className='signLogButtons' onClick={() => {this.props.handleDeleteSession(this.props.currentUser)}}>Log Out</button>

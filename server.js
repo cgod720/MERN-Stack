@@ -15,8 +15,9 @@ const NEWS_KEY = process.env.REACT_APP_NEWS_API
 
 
 const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200,
+  credentials: true
 }
 
 
@@ -34,13 +35,13 @@ app.use(session({
 
 //Routes Controllers
 const usersController = require('./controllers/users.js');
-app.use('/users', usersController)
+app.use('/users', cors(), usersController)
 
 const sessionsController = require('./controllers/sessions.js');
 app.use('/sessions', sessionsController)
 
 const watchListController = require('./controllers/watchlist.js');
-app.use('/watchlist', watchListController)
+app.use('/watchlist', cors(), watchListController)
 
 
 //CMC Request
@@ -72,7 +73,7 @@ app.get('/cmc', (req, res) => {
 app.get('/news', (req, res) => {
   const requestNews = {
     method: 'GET',
-    uri: 'https://newsapi.org/v2/everything?' + 'q=crypto&' +
+    uri: 'https://newsapi.org/v2/everything?' + 'q=cryptocurrency&' +
             'sortBy=latest&' + 'apiKey=' + NEWS_KEY,
     json: true,
     gzip: true

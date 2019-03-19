@@ -46,7 +46,7 @@ class LogInForm extends Component {
               onChange={this.handleLogPassChange}
               value={this.state.password}
             />
-            <input type ='submit'/>
+            <button type="submit"><i className="fas fa-sign-in-alt"></i></button>
           </form>
            : <div>{this.props.handleView('none')}</div>
         }

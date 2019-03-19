@@ -24,7 +24,7 @@ class Coins extends Component {
           <span>Market Cap: {this.props.coin.quote.USD.market_cap}</span>
         </div>
         <div>
-          <button onClick={() => this.props.addToWatchList(this.props)}>Watch</button>
+          <button onClick={() => this.props.addToWatchList(this.props)}><i className="fas fa-eye"></i></button>
         </div>
         <br/>
       </div>

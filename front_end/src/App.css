@@ -83,3 +83,16 @@ a {
   margin-right: 50px;
   font-size: 30px;
 }
+
+#spin {
+  animation-name: spun;
+  animation-duration: 1s;
+}
+@keyframes spun {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

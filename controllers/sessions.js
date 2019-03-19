@@ -14,6 +14,7 @@ router.post('/', (req, res) => {
         message: 'Invalid Username'
       })
     } else if(bcrypt.compareSync(req.body.password, foundUser.password)){
+        console.log('logged in');
         req.session.currentUser = foundUser;
         res.status(201).json(foundUser)
     } else {
