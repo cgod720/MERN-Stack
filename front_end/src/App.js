@@ -21,7 +21,7 @@ class App extends Component {
     }
   }
   fetchCryptos = () => {
-    fetch('http://localhost:5000/cmc')
+    fetch('/cmc')
       .then((data) => {
         return data.json()
         // console.log(data);
@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   fetchNews = () => {
-    fetch('http://localhost:5000/news')
+    fetch('/news')
       .then((data) => {
         return data.json()
       })
@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   handleCreateUser = (user) => {
-    fetch('http://localhost:5000/users', {
+    fetch('/users', {
       body: JSON.stringify(user),
       method: 'POST',
       headers: {
@@ -95,7 +95,7 @@ class App extends Component {
   }
 
   handleCreateSession = (user) => {
-    fetch('http://localhost:5000/sessions', {
+    fetch('/sessions', {
       body: JSON.stringify(user),
       method: 'POST',
       headers: {
@@ -117,7 +117,7 @@ class App extends Component {
   }
 
   handleDeleteSession = (user) => {
-    fetch('http://localhost:5000/sessions', {
+    fetch('/sessions', {
       method: 'DELETE'
     })
       .then((data) => {
@@ -149,7 +149,7 @@ class App extends Component {
 
   addToWatchList = (list) => {
     console.log(list);
-    fetch('http://localhost:5000/watchlist', {
+    fetch('/watchlist', {
       body: JSON.stringify(list),
       method: 'POST',
       headers: {
@@ -167,7 +167,7 @@ class App extends Component {
   }
 
   getWatchList = () => {
-    fetch('http://localhost:5000/watchlist')
+    fetch('/watchlist')
       .then((data) => {
         return data.json()
       })
@@ -198,7 +198,7 @@ class App extends Component {
   handleDeleteWatchList = (arrayIndex, currentArray) => {
     console.log(arrayIndex);
     console.log(currentArray);
-    fetch('http://localhost:5000/watchlist', {
+    fetch('/watchlist', {
       method: 'DELETE'
     })
       .then((data) => {
