@@ -9,7 +9,7 @@ const rp = require('request-promise');
 const PORT = process.env.port || 5000;
 
 //Database
-const MONGODB_URI = process.env.port || 'mongodb://localhost/crypto_sphere'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/crypto_sphere'
 const API_KEY = process.env.REACT_APP_COIN_API
 const NEWS_KEY = process.env.REACT_APP_NEWS_API
 

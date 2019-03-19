@@ -84,6 +84,10 @@ a {
   font-size: 30px;
 }
 
+.coin-search {
+  margin-bottom: 10px;
+}
+
 #spin {
   animation-name: spun;
   animation-duration: 1s;

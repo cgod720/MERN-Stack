@@ -23,13 +23,14 @@ class CoinList extends Component {
       <div className='body-container'>
         <div className='left'>
           <h3>Cryptocurrencies</h3>
+          <input
+            type="text"
+            placeholder="Search Coins"
+            onChange={this.updateSearch}
+            value={this.state.search}
+            className="coin-search"
+            />
           <div className='scroll'>
-            <input
-              type="text"
-              placeholder="Search Coins"
-              onChange={this.updateSearch}
-              value={this.state.search}
-              />
             {filteredCoins.map((coin, index) => {
               return(
                 <Coins
